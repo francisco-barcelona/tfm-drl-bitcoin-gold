@@ -2,7 +2,33 @@
 
 
 
-The main objective is to evaluate whether adding exogenous information (gold price) improves the performance and robustness of a DRL agent compared to a baseline model using only Bitcoin data.
+The objective of this project is to study how different environment designs, reward formulations, and state representations affect the behaviour of Deep Reinforcement Learning (DRL) agents in financial markets.
+
+
+
+Starting from a Bitcoin-only trading environment, the project progressively evolves towards a multi-asset setting including Bitcoin (BTC), gold through the SPDR Gold Shares ETF (GLD), and oil through the United States Oil Fund ETF (USO).
+
+
+
+Special attention is given to:
+
+
+
+\* The incorporation of exogenous information.
+
+\* Dynamic asset allocation.
+
+\* Relative reward formulations.
+
+\* Risk-aware reward design.
+
+\* The impact of transaction costs and inactivity penalties.
+
+\* The prevention of lookahead bias through strict temporal separation between features and future returns.
+
+
+
+The goal is not to develop a production-ready trading system, but to analyse how these design choices influence the policies learned by DRL agents.
 
 
 
@@ -10,17 +36,43 @@ The main objective is to evaluate whether adding exogenous information (gold pri
 
 
 
-\- Two agents are trained under identical conditions:
+\* Financial markets are modelled as Markov Decision Processes (MDPs).
 
-&#x20; - BTC-only (baseline)
+\* Agents are trained using Proximal Policy Optimization (PPO) implemented with Stable-Baselines3.
 
-&#x20; - BTC + GLD (enhanced model)
+\* Multiple environments are evaluated, ranging from single-asset Bitcoin trading to multi-asset asset allocation problems involving BTC, GLD and USO.
 
-\- The problem is modeled as a Markov Decision Process (MDP)
+\* Different reward functions are tested, including:
 
-\- Training is performed using DRL algorithms (e.g., PPO)
 
-\- Evaluation is done via backtesting with transaction costs and out-of-sample data
+
+&#x20; \* Simple returns
+
+&#x20; \* Risk-adjusted rewards
+
+&#x20; \* Sharpe-inspired rewards
+
+&#x20; \* Relative rewards
+
+&#x20; \* Inactivity penalties
+
+&#x20; \* Dynamic transaction costs
+
+\* State representations are progressively enriched using:
+
+
+
+&#x20; \* Historical returns
+
+&#x20; \* Volatility measures
+
+&#x20; \* Momentum indicators
+
+&#x20; \* Relative strength features
+
+\* Evaluation is performed through out-of-sample backtesting using cumulative return, Sharpe ratio, Sortino ratio, maximum drawdown and asset-switching statistics.
+
+\* All experiments are designed to avoid lookahead bias by ensuring that the agent only observes information available at decision time.
 
 
 
